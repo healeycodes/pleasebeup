@@ -46,7 +46,7 @@ def ping(website_id, failure=False):
     website = session.query(Website).get(website_id)
 
     try:
-        r = requests.head(website.url, timeout=15)
+        r = requests.head('http://www.dwddwdwdwwddwddwwd.com/', timeout=15)
         if r.status_code != 200 or 302:
             failure = True
 
@@ -59,8 +59,9 @@ def ping(website_id, failure=False):
         website.failure_count += 1
         if website.failure_count >= 5:
             send_email.delay(website_id)
-
-    website.failure_count = 0
+            return
+    else:
+        website.failure_count = 0
     session.commit()
     session.close()
 
