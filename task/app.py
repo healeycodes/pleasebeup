@@ -25,7 +25,7 @@ EMAIL_SEND_ADDR = 'alert@pleasebeup.xyz'
 
 @app.on_after_configure.connect
 def setup_periodic_task(sender, **kwargs):
-    sender.add_periodic_task(5.0, queue_ping.s(), expires=60)
+    sender.add_periodic_task(60.0, queue_ping.s(), expires=60)
 
 
 @app.task
