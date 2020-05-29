@@ -102,8 +102,8 @@ app.post('/register', (request, response) => {
                 [request.body.email, hash]
             );
             db.run(
-                'INSERT INTO Website (email, url) VALUES (?, ?)',
-                [request.body.email, request.body.website]
+                'INSERT INTO Website (email, url, failure_count, last_checked) VALUES (?, ?, ?, ?)',
+                [request.body.email, request.body.website, 0, 0]
             );
         });
         response.redirect('/dashboard');
