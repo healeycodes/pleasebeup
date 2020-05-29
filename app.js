@@ -106,7 +106,9 @@ app.post('/register', (request, response) => {
                 [request.body.email, request.body.website, 0, 0]
             );
         });
-        response.redirect('/dashboard');
+        passport.authenticate('local')(request, response, () => {
+            response.redirect('/dashboard');
+        });
     });
 });
 
