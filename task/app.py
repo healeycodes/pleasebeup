@@ -72,7 +72,12 @@ def send_email(website_id, attempt=0):
 
     session = init_session()
     website = session.query(Website).get(website_id)
+
+    # Andy didnt set up the foreign key relationship
     user = session.query(User).filter(User.email == website.email)[0]
+
+    website.failure_count = 0
+    session.commit()
     session.close()
 
     headers = {
@@ -96,7 +101,7 @@ def send_email(website_id, attempt=0):
     )
 
     response = json.loads(r.text)
-    
+
     print('email should send')
 
     if response['ErrorCode'] == 0:
