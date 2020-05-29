@@ -57,8 +57,9 @@ def ping(website_id, failure=False):
 
     if failure:
         website.failure_count += 1
-        if website.failure_count >= 5:
-            send_email.delay(website_id)
+        if website.failure_count in (5, 10, 30):
+            # Skip email while in alpha
+            # send_email.delay(website_id)
             return
     else:
         website.failure_count = 0
