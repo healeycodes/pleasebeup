@@ -14,7 +14,7 @@ It's a **website monitoring and alert system**.
 
 <br>
 
-If your website stops responding to our pings you get an email alert. Our stretch goal was SMS alerts too but we didn't make it.
+If your website stops responding to our pings you get an email alert. Our stretch goal was SMS alerts (but we didn't make it).
 
 
 <br>
