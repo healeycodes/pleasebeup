@@ -64,7 +64,9 @@ passport.deserializeUser((email, cb) => {
 });
 
 app.get('/', (request, response) => {
-    response.render('home.html', { user: request.user });
+    db.all('SELECT * from Website', [], (err, rows) => {
+        response.render('home.html', { websiteCount: rows.length, user: request.user });
+    });
 });
 
 app.get('/dashboard', connectEnsureLogin.ensureLoggedIn('/login'), (request, response) => {
