@@ -60,6 +60,7 @@ def ping(website_id, failure=False):
         if website.failure_count >= 5:
             send_email.delay(website_id)
 
+    website.failure_count = 0
     session.commit()
     session.close()
 
