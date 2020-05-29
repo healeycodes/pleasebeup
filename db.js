@@ -15,7 +15,7 @@ const setup = () => {
             console.log('New table User created!');
 
             db.run(
-                'CREATE TABLE Website (id INTEGER PRIMARY KEY, email TEXT UNIQUE, url TEXT, up INTEGER, last_checked DATETIME, sqltime DATETIME DEFAULT CURRENT_TIMESTAMP)'
+                'CREATE TABLE Website (id INTEGER PRIMARY KEY, email TEXT UNIQUE, url TEXT, failure_count INTEGER, last_checked DATETIME, sqltime DATETIME DEFAULT CURRENT_TIMESTAMP)'
             );
             console.log('New table Website created!');
         }

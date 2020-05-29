@@ -1,7 +1,9 @@
 <!doctype html>
 
 <head>
-    <title>{% block title %}pleasebeup{% endblock %}</title>
+    <title>
+        {% block title %}pleasebeup{% endblock %}
+    </title>
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
     <link rel="stylesheet" href="css/base.css">
@@ -10,16 +12,23 @@
 
 <body>
     <header>
-        <h1>pleasebeup</h1>
+        <h1><img src="/icon.png" style="width: 1em; padding: 0; margin: 0; vertical-align: middle;">&nbsp;pleasebeup</h1>
         <nav>
-            <a href="/">Home</a> /
-            <a href="/login">Login</a>
+            {% if not user %}
+                <a href="/">Home</a> /
+            {% endif %}
+            <a href="/dashboard">Dashboard</a>
+            {% if not user %} /
+                <a href="/register">Register</a>
+            {% endif %}
+            {% if user %} /
+                <a href="/logout">Logout</a>
+            {% endif %}
         </nav>
     </header>
     <br>
     <main>
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 </body>
 

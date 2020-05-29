@@ -1,4 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-    Dash
+    <p>Hey {{ user.email }} 👋</p>
+    <p>Welcome to your dashboard.</p>
+    <table>
+        <tr>
+            <th>URL</th>
+            <th>Failure count</th>
+            <th>Last checked</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>{{ website.url }}</td>
+            <td>{{ website.failure_count }}</td>
+            <td>{{ website.last_checked }}</td>
+            <td>{% if not website.failure_count or website.failure_count > 0 %}❌{% else %}✅{% endif %}</td>
+        </tr>
+    </table>
 {% endblock %}
