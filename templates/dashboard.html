@@ -10,7 +10,7 @@
             <th>Status</th>
         </tr>
         <tr>
-            <td>{{ website.url }}</td>
+            <td><a href="{{ website.url }}">{{ website.url }}</a></td>
             {% if website.failure_count > 0 %}<td>{{ website.failure_count }}</td>{% endif%}
             <td>{{ website.last_checked }}</td>
             <td>{% if website.failure_count > 0 %}❌{% else %}✅{% endif %}</td>
