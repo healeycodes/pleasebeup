@@ -49,9 +49,7 @@ def ping(website):
         if r.status_code != 200:
             logging.info(f'{website.url} is down!')
             website.failure_count += 1
-
-            if website.user.email_enabled:
-                send_email.delay()
+            send_email.delay()
 
         session.commit()
         session.close()
