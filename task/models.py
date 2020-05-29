@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, DateTime, Float, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -18,8 +18,9 @@ class Website(Base):
     __tablename__ = "Website"
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    failure_count = Column(Integer, ForeignKey('person.id'), nullable=False)
-    last_checked = Column(Integer, ForeignKey('person.id'), nullable=False)
+    url = Column(String(50), nullable=False)
+    email = Column(String(50), nullable=False)
+    failure_count = Column(Integer, Integer(50), nullable=False)
+    last_checked = Column(Integer, DateTime(50), nullable=False)
 
     user = relationship("User", backref="user")
