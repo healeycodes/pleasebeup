@@ -8,7 +8,6 @@ app = Celery(backend='rpc://')
 
 @app.on_after_configure.connect
 def setup_periodic_task(sender, **kwargs):
-    # Calls test('world') every 30 seconds
     sender.add_periodic_task(10.0, queue_pings.s(), expires=10)
 
 
@@ -25,11 +24,24 @@ def queue_pings():
 
 @app.task
 def ping(website):
-    r = requests.get('http://www.google.com')
-    if r.status_code == 200:
-        return('blahem')
-    else:
-        return('what')
+    try:
+        r = requests.head('http://www.google.com')
+        if r.status_code == 200:
+            return
+    except Exception as e:
+        logging.info(f'Failed to send request!')
+
+    user = website.user
+    logging.info(f'{website.url} is down!')
+
+    if user.email_enabled:
+        send_email.delay()
+
+    if user.sms_enabled:
+        send_sms.delay()
+
+    if user.phonecall_enabled:
+        make_phonecall.delay()
 
 
 @app.task
