@@ -8,11 +8,17 @@ from requests import RequestException
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Website
+from task.models import Website
 
 app = Celery(backend='rpc://')
+
 engine = create_engine('sqlite:///sqllight.db', echo=True)
 init_session = sessionmaker(bind=engine)
+
+POSTMARK_URL = 'https://api.postmarkapp.com/email'
+POSTMARK_TOKEN = 'b9654a7f-8ed5-4d13-af41-f77e95d3d055'
+
+EMAIL_SEND_ADDR = 'alert@pleasebeup.xyz'
 
 
 @app.on_after_configure.connect
@@ -34,9 +40,10 @@ def queue_ping():
 
 @app.task
 def ping(website):
-    session = init_session()
     try:
-        r = requests.head('http://www.google.com')
+        r = requests.head(website.url)
+
+        session = init_session()
         website.last_checked = datetime.now()
 
         if r.status_code != 200:
@@ -63,20 +70,20 @@ def send_email(website, attempt=0):
 
     headers = {
         'Content-Type': 'application/json',
-        'X-Postmark-Server-Token': 'b9654a7f-8ed5-4d13-af41-f77e95d3d055',
+        'X-Postmark-Server-Token': POSTMARK_TOKEN,
         'Accept': 'application/json'
     }
 
     data = {
-        'From': 'alert@pleasebeup.xyz',
+        'From': EMAIL_SEND_ADDR,
         'To': user.email,
         'Subject': 'Your website is on fire!',
-        'HtmlBody': '<b>We noticed that your site has been'
+        'HtmlBody': '<b>We noticed that your site has been '
                     'offline for more than 5 minutes!</b>'
     }
 
     r = requests.post(
-        'https://api.postmarkapp.com/email',
+        POSTMARK_URL,
         headers=headers,
         data=data
     )
