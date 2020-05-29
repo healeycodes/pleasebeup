@@ -1,6 +1,6 @@
 # pleasebeup
 
-This was a hackday project that I built in one day with @samlader
+This was a hackday project that I built in one day with @samlader.
 
 It's a **website monitoring and alert system**.
 
