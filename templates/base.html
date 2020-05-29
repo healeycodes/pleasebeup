@@ -1,0 +1,26 @@
+<!doctype html>
+
+<head>
+    <title>{% block title %}pleasebeup{% endblock %}</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body>
+    <header>
+        <h1>pleasebeup</h1>
+        <nav>
+            <a href="/">Home</a> /
+            <a href="/login">Login</a>
+        </nav>
+    </header>
+    <br>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>

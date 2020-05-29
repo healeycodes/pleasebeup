@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    <form method="post">
+        <fieldset>
+            <legend>Register</legend>
+            <p>
+                <label for="email">Email</label>
+                <input type="email" name="email" placeholder="ada@lovelace.com" required>
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" name="password" required>
+            </p>
+            <p>
+                <label for="website">Website</label>
+                <input type="text" name="website" placeholder="example.org" required>
+            </p>
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+{% endblock %}
