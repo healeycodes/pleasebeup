@@ -5,15 +5,15 @@
     <table>
         <tr>
             <th>URL</th>
-            <th>Failure count</th>
+            {% if website.failure_count > 0 %}<th>Failure count</th>{% endif%}
             <th>Last checked</th>
             <th>Status</th>
         </tr>
         <tr>
-            <td>{{ website.url }}</td>
-            <td>{{ website.failure_count }}</td>
+            <td><a href="{{ website.url }}">{{ website.url }}</a></td>
+            {% if website.failure_count > 0 %}<td>{{ website.failure_count }}</td>{% endif%}
             <td>{{ website.last_checked }}</td>
-            <td>{% if not website.failure_count or website.failure_count > 0 %}❌{% else %}✅{% endif %}</td>
+            <td>{% if website.failure_count > 0 %}❌{% else %}✅{% endif %}</td>
         </tr>
     </table>
 {% endblock %}

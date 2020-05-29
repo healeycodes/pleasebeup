@@ -70,6 +70,7 @@ app.get('/', (request, response) => {
 app.get('/dashboard', connectEnsureLogin.ensureLoggedIn('/login'), (request, response) => {
     db.all('SELECT * from Website where email = ?', [request.user.email], (err, rows) => {
         if (err || rows.length === 0) return response.send('Server error.');
+        rows[0].last_checked = new Date(rows[0].last_checked).toGMTString();
         response.render('dashboard.html', { website: rows[0], user: request.user });
     });
 });
