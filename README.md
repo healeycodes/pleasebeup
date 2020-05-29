@@ -10,7 +10,7 @@ It's a **website monitoring and alert system**.
 
 <hr>
 
-![](https://github.com/healeycodes/pleasebeup/raw/master/preview-dashboard.png)
+![](https://github.com/healeycodes/pleasebeup/raw/master/preview-dashboard.jpg)
 
 <br>
 
